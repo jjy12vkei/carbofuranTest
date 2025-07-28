@@ -4,8 +4,11 @@
 <meta charset="UTF-8" />
 <title>농약 검출기</title>
 <style>
-  body { font-family: sans-serif; padding: 1rem; }
-  input { width: 4rem; margin-right: .5rem; }
+  body { font-family:sans-serif; padding:1.5rem }
+  label{display:block;margin:.4rem 0}
+  input { width:5rem;margin-left:.4rem }
+  button{ margin-top:.8rem;padding:.4rem 1.2rem }
+  #out { margin-top:1.2rem;font-weight:bold }
 </style>
 </head>
 <body>
@@ -19,7 +22,7 @@
 <p id="out"></p>
 
 <script>
-/* 1) Python에서 복사한 회귀 계수  */
+  
 const coef = [
 -0.000001041, -0.000002073, -0.000001679, 
 -0.000159334, -0.000182966, -0.000156811,
@@ -29,10 +32,15 @@ const coef = [
 -0.000020036, 0.000050736, -0.000025001, 
 -0.000003810
 ];
-const intercept = -1.234;  // 예시
+
+const intercept = 4.701306343; 
 
 /* 2) 다항 특성 계산(R²,G²,…) */
 function polyFeatures([R, G, B]) {
+  R = (R - mean[0]) / std[0];
+  G = (G - mean[1]) / std[1];
+  B = (B - mean[2]) / std[2];
+  
   return [
     R, G, B,
     R*R, R*G, R*B,
@@ -44,14 +52,12 @@ function polyFeatures([R, G, B]) {
   ];
 }
 
-/* ③ 예측 */
 function predict(rgb) {
   const x = polyFeatures(rgb);
   const yLog = x.reduce((s, xi, i) => s + xi * coef[i], intercept);
   return Math.pow(10, yLog) - 1;      // 로그 역변환
 }
 
-/* ④ 클릭 이벤트 */
 document.getElementById('run').onclick = () => {
   const R = +document.getElementById('r').value;
   const G = +document.getElementById('g').value;
