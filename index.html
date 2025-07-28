@@ -1,71 +1,71 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<title>농약 검출기</title>
-<style>
-  body { font-family:sans-serif; padding:1.5rem }
-  label{display:block;margin:.4rem 0}
-  input { width:5rem;margin-left:.4rem }
-  button{ margin-top:.8rem;padding:.4rem 1.2rem }
-  #out { margin-top:1.2rem;font-weight:bold }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>카보퓨란 검출 키트</title>
+  <style>
+    body { font-family:sans-serif; padding:1.5rem }
+    label{display:block;margin:.4rem 0}
+    input { width:5rem;margin-left:.4rem }
+    button{ margin-top:.8rem;padding:.4rem 1.2rem }
+    #out { margin-top:1.2rem;font-weight:bold }
+  </style>
 </head>
 <body>
-<h2>RGB → 농약 농도 예측</h2>
-
-<label>R <input id="r" type="number" min="0" max="255"></label>
-<label>G <input id="g" type="number" min="0" max="255"></label>
-<label>B <input id="b" type="number" min="0" max="255"></label>
-<button id="run">예측</button>
-
-<p id="out"></p>
-
-<script>
+  <h2>RGB → 농약 농도 예측</h2>
   
-const coef = [
--0.000001041, -0.000002073, -0.000001679, 
--0.000159334, -0.000182966, -0.000156811,
--0.000173997, -0.000176093, -0.000172202, 
-0.000000230, 0.000011214, -0.000007937, 
-0.000009195, -0.000038471, 0.000030231, 
--0.000020036, 0.000050736, -0.000025001, 
--0.000003810
-];
-
-const intercept = 4.701306343; 
-
-/* 2) 다항 특성 계산(R²,G²,…) */
-function polyFeatures([R, G, B]) {
+  <label>R <input id="r" type="number" min="0" max="255"></label>
+  <label>G <input id="g" type="number" min="0" max="255"></label>
+  <label>B <input id="b" type="number" min="0" max="255"></label>
+  <button id="run">예측</button>
   
-  return [
-    R, G, B,
-    R*R, R*G, R*B,
-    G*G, G*B, B*B,
-    R*R*R, R*R*G, R*R*B,
-    R*G*G, R*G*B, R*B*B,
-    G*G*G, G*G*B, G*B*B, 
-    B*B*B
-  ];
-}
-
-function predict(rgb) {
-  const x = polyFeatures(rgb);
-  const yLog = x.reduce((s, xi, i) => s + xi * coef[i], intercept);
-  return Math.pow(10, yLog) - 1;      // 로그 역변환
-}
-
-document.getElementById('run').onclick = () => {
-  const R = +document.getElementById('r').value;
-  const G = +document.getElementById('g').value;
-  const B = +document.getElementById('b').value;
-  if ([R,G,B].some(isNaN)) return alert('RGB 값을 모두 입력하세요.');
-
-  const conc = predict([R, G, B]);
-  const msg  = conc < 7.5 ? '농약이 검출되지 않음' : '농약이 검출됨';
-  document.getElementById('out').textContent =
-    `예측 농도: ${conc.toFixed(2)} ppb → ${msg}`;
-};
-</script>
+  <p id="out"></p>
+  
+  <script>
+    const coef = [
+    -0.000001041, -0.000002073, -0.000001679, 
+    -0.000159334, -0.000182966, -0.000156811,
+    -0.000173997, -0.000176093, -0.000172202, 
+    0.000000230, 0.000011214, -0.000007937, 
+    0.000009195, -0.000038471, 0.000030231, 
+    -0.000020036, 0.000050736, -0.000025001, 
+    -0.000003810
+    ];
+    
+    const intercept = 4.701306343; 
+    
+    /* 2) 다항 특성 계산(R²,G²,…) */
+    function polyFeatures([R, G, B]) {
+      
+      return [
+        R, G, B,
+        R*R, R*G, R*B,
+        G*G, G*B, B*B,
+        R*R*R, R*R*G, R*R*B,
+        R*G*G, R*G*B, R*B*B,
+        G*G*G, G*G*B, G*B*B, 
+        B*B*B
+      ];
+    }
+    
+    function predict(rgb) {
+      const x = polyFeatures(rgb);
+      const yLog = x.reduce((s, xi, i) => s + xi * coef[i], intercept);
+      return Math.pow(10, yLog) - 1;      // 로그 역변환
+    }
+    
+    document.getElementById('run').onclick = () => {
+      const R = +document.getElementById('r').value;
+      const G = +document.getElementById('g').value;
+      const B = +document.getElementById('b').value;
+      if ([R,G,B].some(isNaN)) return alert('RGB 값을 모두 입력하세요.');
+    
+      const conc = predict([R, G, B]);
+      const msg  = conc < 7.5 ? '농약이 검출되지 않음' : '농약이 검출됨';
+      document.getElementById('out').textContent =
+        `예측 농도: ${conc.toFixed(2)} ppb → ${msg}`;
+    };
+  </script>
 </body>
 </html>
