@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>카바메이트계 농약 검출 키트</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>카바메이트계 농약 검출 키트</h1>
+  <hr>
+
+  <div class="container">
+
+    <!-- 왼쪽 블록 -->
+    <div class="left-block">
+      <h2>시료 전처리 방법</h2>
+      <div class="preprocess-container">
+
+        <!-- 1열: 채소류 -->
+        <div class="table-col">
+          <table class="fixed-table">
+            <colgroup><col><col></colgroup>
+            <caption>채소류</caption>
+            <tr><th>품목</th><th>전처리 방법</th></tr>
+            <tr><td>무의 뿌리, 생강, 당근</td><td>물로 가볍게 씻어 흙 제거</td></tr>
+            <tr><td>무의 잎, 케일</td><td>변질 잎 제거</td></tr>
+            <tr><td>배추, 양배추, 상추, 양상추</td><td>바깥 변질 잎 및 심 제거</td></tr>
+            <tr><td>양파, 파, 마늘, 부추</td><td>껍질질 및 잔뿌리 제거</td></tr>
+            <tr><td>시금치</td><td>잔뿌리 및 변질 잎 제거</td></tr>
+            <tr><td>고사리, 샐러리, 아스파라거스, 쑥갓</td><td>뿌리 및 변질 잎 제거</td></tr>
+            <tr><td>고추, 토마토, 피망, 가지</td><td>받침 제거</td></tr>
+            <tr><td>수박, 참외, 멜론, 오이, 호박</td><td>꼭지 제거</td></tr>
+          </table>
+        </div>
+
+        <!-- 2열: 과일류 -->
+        <div class="table-col">
+          <table class="fixed-table">
+            <colgroup><col><col></colgroup>
+            <caption>과일류</caption>
+            <tr><th>품목</th><th>전처리 방법</th></tr>
+            <tr><td>딸기</td><td>받침 제거</td></tr>
+            <tr><td>포도</td><td>꼭지 및 줄기 제거</td></tr>
+            <tr><td>감</td><td>받침 및 씨 제거</td></tr>
+            <tr><td>복숭아, 살구, 자두, 매실, 체리</td><td>꼭지 및 씨 제거</td></tr>
+            <tr><td>사과, 배, 모과, 바나나, 키위</td><td>꼭지(부분) 제거</td></tr>
+            <tr><td>밀감, 레몬, 자몽, 오렌지, 감귤류</td><td>과실 전체</td></tr>
+          </table>
+        </div>
+
+        <!-- 3열: 곡류 + 서류 + 두류 -->
+        <div class="table-col">
+          <table class="fixed-table">
+            <colgroup><col><col></colgroup>
+            <caption>곡류</caption>
+            <tr><th>품목</th><th>전처리 방법</th></tr>
+            <tr><td>옥수수</td><td>포엽, 수염 및 이삭 속 제거</td></tr>
+            <tr><td>쌀, 보리, 밀, 메밀, 호밀, 수수, 귀리, 조, 율무</td><td>탈각</td></tr>
+            <tr><td>기타 곡류</td><td>탈각</td></tr>
+          </table>
+          <table class="fixed-table small">
+            <colgroup><col><col></colgroup>
+            <caption>서류</caption>
+            <tr><th>품목</th><th>전처리 방법</th></tr>
+            <tr><td>감자, 고구마, 토란 및 기타 서류</td><td>잔뿌리 제거 후 물로 가볍게 씻어 흙 제거</td></tr>
+          </table>
+          <table class="fixed-table small">
+            <colgroup><col><col></colgroup>
+            <caption>두류</caption>
+            <tr><th>품목</th><th>전처리 방법</th></tr>
+            <tr><td>대두, 팥, 녹두, 완두, 강낭콩, 땅콩 및 기타 두류</td><td>깍지 제거</td></tr>
+          </table>
+        </div>
+
+      </div> <!-- .preprocess-container -->
+
+      <div class="production-method">
+        <h2>제작 방법</h2>
+        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FyAbuJ%2FbtrWw7bbfaR%2FAAAAAAAAAAAAAAAAAAAAAGcaRHfwiSpOlu9dxFSVVl-gCKrMFCYnKgWq1edaoytT%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1753973999%26allow_ip%3D%26allow_referer%3D%26signature%3DeizxYWo6B%252Fag06UfRb6BQyRcquI%253D">
+      </div>
+    </div> <!-- .left-block -->
+
+    <div><!--오른쪽 블록, 이미지 업로드 영역-->
+      <h2>이미지를 업로드하세요</h2>
+      
+      <label>R <input id="r" type="number" min="0" max="255"></label>
+      <label>G <input id="g" type="number" min="0" max="255"></label>
+      <label>B <input id="b" type="number" min="0" max="255"></label>
+      <button id="run">확인</button>
+      
+      <p id="out"></p>
+    </div>
+  </div>
+
+  <script>
+    const coef = [
+    0.000005712, -0.000003164, 0.000001429, 
+    0.000696053, -0.000010865, 0.000630236,
+    -0.000482059, -0.000244397, 0.000260700, 
+    -0.000022404, 0.000025543, 0.000028715, 
+    -0.000019486, -0.000014450, -0.000019760, 
+    -0.000062310, 0.000150870, -0.000096179, 
+    0.000025402
+    ];
+    
+    const intercept =-9.137034416; 
+    
+    //다항 특성 계산
+    function polyFeatures([R, G, B]) {
+      
+      return [
+        R, G, B,
+        R*R, R*G, R*B,
+        G*G, G*B, B*B,
+        R*R*R, R*R*G, R*R*B,
+        R*G*G, R*G*B, R*B*B,
+        G*G*G, G*G*B, G*B*B, 
+        B*B*B
+      ];
+    }
+    
+    function predict(rgb) {
+      const x = polyFeatures(rgb);
+      const yLog = x.reduce((s, xi, i) => s + xi * coef[i], intercept);
+      return Math.pow(10, yLog);      // 로그 역변환
+    }
+    
+    document.getElementById('run').onclick = () => {
+      const R = +document.getElementById('r').value;
+      const G = +document.getElementById('g').value;
+      const B = +document.getElementById('b').value;
+      if ([R,G,B].some(isNaN)) return alert('RGB 값을 모두 입력하세요.');
+    
+      const conc = predict([R, G, B]);
+      const msg  = conc < 7.5 ? '농약이 검출되지 않음' : '농약이 검출됨';
+      document.getElementById('out').textContent =
+        `예상 농약 농도: ${conc.toFixed(2)} ppb\n${msg}`;
+    };
+  </script>
+</body>
+</html>
