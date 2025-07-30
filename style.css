@@ -1,0 +1,203 @@
+/* ── 전체 레이아웃 ── */
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+/* 왼쪽 블록: 전처리 표 + 제작 방법 */
+.left-block {
+  flex: 1;
+  max-width: 65%;
+}
+
+/* 전처리 표를 가로 3채널로 배치 */
+.preprocess-container {
+  display: flex;
+  gap: 1rem;
+}
+.preprocess-container .table-col {
+  flex: 1;
+}
+
+/* 각 표 공통 스타일 */
+.fixed-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+.fixed-table caption {
+  border-top: 1px solid #444;
+  border-bottom: 1px solid #444;
+  padding: 4px;
+  word-break: break-word;
+  color: #000000;
+  background: #aaaaaa1f;
+  font-size: 12px;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.fixed-table td {
+  font-size: 12px;
+  border: 1px solid #aaa;
+  padding: 4px;
+  word-break: break-word;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+/* 2열 균등 분할 */
+.fixed-table col:nth-child(1) { width: 50%; }
+.fixed-table col:nth-child(2) { width: 50%; }
+
+/* 곡류 열 아래에 서류/두류 표는 작게 */
+.fixed-table.small {
+  margin-top: 0.3rem;
+}
+
+/* 제작 방법 박스 */
+.production-method {
+  margin-top: 1rem;
+}
+.production-method textarea {
+  width: 100%;
+  height: 150px;
+  box-sizing: border-box;
+}
+
+/* 오른쪽 블록: 업로드 패널 */
+.right-block {
+  flex: 0 0 30%;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+}
+
+.right-block button {
+  margin-top: 0.5rem;
+  margin-left: 15%;
+  width : 70%;
+  height : 3rem;
+  font-size: 30px;
+  font-weight: bold;
+  color: #ffffff;
+  background: #2d4ca2c8;
+  border-radius: 8px;
+  border: 0px;
+}
+
+.upload-drag {
+  border: 2px dashed #aaa;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* 기본 폼 스타일 */
+body {
+  font-family: sans-serif;
+  padding: 1rem;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+hr {
+  margin: 0 0 1rem;
+}
+label {
+  display: block;
+  margin: 0.4rem 0;
+}
+input[type="number"] {
+  width: 5rem;
+  margin-left: 0.4rem;
+}
+
+/* 비디오들을 가로로 배치할 flex 컨테이너 */
+.video-row {
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: flex-start; /* 세로 기준 윗쪽 정렬 */
+  gap: 0.5rem;               /* 비디오 간격 */
+  flex-wrap: wrap;         /* 화면이 좁아지면 자동으로 다음 줄로 */
+}
+
+/* 각 비디오 카드(figure) */
+.video-figure {
+  flex: 0 1 45%;           /* 한 row 에 최대 2개, 각 45% 너비 */
+  max-width: 500px;        /* 필요 시 최대 픽셀 너비 */
+  margin: 0;               /* 위아래 여백은 없애고 */
+  text-align: center;      /* 캡션 중앙 정렬 */
+}
+
+.video-figure video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.video-figure figcaption {
+  font-size: 0.875rem;
+  color: #555;
+}
+
+img {
+  margin-top: 0.8rem;
+  width: 100%;
+  height: 80%;
+}
+#out {
+  font-weight: bold;
+  margin-top: 1rem;
+  white-space: pre-wrap;
+}
+
+.ibm-plex-sans-kr-thin {
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.ibm-plex-sans-kr-extralight {
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.ibm-plex-sans-kr-light {
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.ibm-plex-sans-kr-regular {
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ibm-plex-sans-kr-medium {
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.ibm-plex-sans-kr-semibold {
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.ibm-plex-sans-kr-bold {
+  font-family: "IBM Plex Sans KR", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
