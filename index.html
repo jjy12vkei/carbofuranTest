@@ -140,7 +140,7 @@
       const conc = predict([R, G, B]);
       const msg  = conc < 7.5 ? '농약이 검출되지 않음' : '농약이 검출됨';
       document.getElementById('out').textContent =
-        `${conc.toFixed(2)*0.004} mg/kg[ppm]\n${msg}`;
+        `${(conc*0.004).toFixed(2)} mg/kg[ppm]\n${msg}`;
     };
   </script>
 </body>
