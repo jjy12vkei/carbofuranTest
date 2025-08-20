@@ -183,7 +183,15 @@
       const G = +document.getElementById('g').value;
       const B = +document.getElementById('b').value;
       const conc = predict([R, G, B]);
-      const msg  = conc < 7.5 ? '농약이 검출되지 않음' : '농약이 검출됨';
+      let msg = '';
+      const concValue = conc * 0.004;
+      if (conc > 2000 * 0.004) {
+        msg = '다시 용액을 촬영해주세요';
+      } else if (conc < 7.5 * 0.004) {
+        msg = '농약이 검출되지 않음';
+      } else {
+        msg = '농약이 검출됨';
+      }
       outEl.textContent = `${(conc*0.004).toFixed(2)} mg/kg[ppm]\n${msg}`;
       rightPanel.classList.add('has-result');
 
